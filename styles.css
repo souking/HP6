@@ -1,0 +1,109 @@
+/* 
+##3
+
+@media (min-width: 600px) and (max-width: 800px) {
+  body {
+    background: skyblue;
+  }
+}
+cssのメディアクエリという仕組みを使う方法
+今回はviewportの幅に応じて背景色を設定する
+書き方は上のように書く
+600px以上800px以下の時にスタイルを変える
+また、()の前後には半角空白が必要
+ */
+
+
+ /* 
+ ##4~
+
+ @media (min-width: 0px) and (max-width: 599px) {
+   
+ }
+ @media (min-width: 600px) and (max-width: 799px) {
+
+ }
+ @media (min-width: 800px) {
+
+ }
+
+ 今回は、ブラウザの幅が狭い時は画像の領域の下に文字が来て、ある程度の幅になると横並びになって、さらに幅が広くなるとある程度の幅を持って中央揃えになり、広告のための幅が右側に表示される
+ また、このように書くと、全ての場合で共通のスタイルがあった場合、全てに書かなければいけなくなってしまうが、cssでは後から書いたものが優先されるという性質を使うので、共通のスタイルは先に書き、必要な分は後から付け足していく
+ また、余談でスタイルが変わる時のviewpointの幅をブレイクポイントという
+ */
+
+
+
+
+
+ /* common (共通スタイル)*/
+ /* small screen (小さい画面の時) */
+ body {
+   margin: 0;
+ }
+
+ aside {
+   display: none;
+ }
+
+ .image {
+   background: pink;
+   height: 100px;
+ }
+
+ .text {
+   background: silver;
+   height: 100px;
+ }
+
+ /* medium screen (中くらいの画面の時) */
+@media (min-width: 600px) {
+  section {
+    display: flex;
+  }
+  .image {
+    width: 200px;
+  }
+
+  .text {
+    flex: 1;
+  }
+
+}
+
+/* large screen (大きい画面の時) */
+@media (min-width: 800px) {
+  section {
+    width: 800px;
+    margin: 0 auto;
+  }
+
+  aside {
+    display: block;
+    background: plum;
+    width: 160px;
+  }
+
+}
+/* 
+まずは、共通のスタイルはメディアクエリの外に書けば良い
+最初に画面が切り替わるのは600pxの時なので0~500pxの時は共通スタイルの書けば良い
+また、800pxになったらlarge screenで上書きされるだけなので、medium screenの書き方を変える
+
+
+まずは、狭いviewportの時（モバイルサイト）
+bodyにデフォルトでついているmarginを0にする
+領域がわかりやすいように背景色と幅をつける
+
+
+次に、viewportの幅が600px以上になった時の設定
+sectionに対してdisplayをflexにして横並びにして、.imageは固定幅にして、.textは可変にするので、flexを１に指定
+
+
+最後は、800px以上になった時の設定
+sectionに対してwidth設定して、中央揃えにするためにmargin: 0 auto;　とする
+また、adをlarge screen以外の時は消したいので、共通のところでdisplayをnoneに設定する
+そして、asideを表示させるために、large screen　でdisplayの値をasideタグの初期値であるdisplayをblockに指定
+あとは、幅と背景色も設定
+*/
+
